@@ -48,7 +48,7 @@ jobs:
           restore-keys: ${{ runner.os }}
 
       - name: Setup Rust
-        uses: actions-rs/toolchain@1
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           default: true
