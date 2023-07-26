@@ -1,12 +1,13 @@
 use anyhow::Result;
 use clap::Parser;
 
-use ascii_art::options::Options;
+use asciify::options::Options;
 
 fn main() -> Result<()> {
     let options = Options::parse();
+    options.validate();
 
-    match ascii_art::run(options) {
+    match asciify::run(options) {
         Ok(_) => Ok(()),
         Err(e) => {
             eprintln!("Failed to run program! Error: {}", e);

@@ -3,9 +3,10 @@ use colored::{ColoredString, Colorize};
 use image::io::Reader as ImageReader;
 use image::GenericImageView;
 use options::Mode;
-use std::io::{BufWriter, Write};
+use std::io::Write;
 
 pub mod options;
+mod output;
 
 use crate::options::Options;
 
@@ -13,9 +14,7 @@ pub fn run(options: Options) -> Result<()> {
     let image = ImageReader::open(&options.image)?.decode()?;
     let chars: Vec<char> = options.chars.chars().collect();
     let Options { scale, mode, .. } = options;
-
-    // Output buffer to write result into
-    let mut buffer = Box::new(BufWriter::with_capacity(1024, std::io::stdout().lock()));
+    let mut buffer = output::prepare_output_buffer(&options.output_method, &options.file_output)?;
 
     let (width, height) = image.dimensions();
 
