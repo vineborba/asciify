@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 env:
-  $BINARY_NAME: asciify
+  BINARY_NAME: asciify
 
 jobs:
   build-and-release:
